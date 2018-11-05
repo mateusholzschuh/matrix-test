@@ -1,4 +1,41 @@
 /**
+ * WORKING WITH MATRICES (order 1 to 3)
+ * 
+ * Return the cofactor of the element a[i,j]
+ * @param {*} matrix matrix
+ * @param {*} i row index
+ * @param {*} j column index
+ */
+function getCofactor(matrix, i, j)
+{
+    let cofactor = (i+j & 1 ? -1 : 1);
+
+    let tmatrix = new Array();
+
+    // Remove the row and the column from the matrix
+    for(let y=0; y<matrix.length; ++y)
+    {
+        if(y == j) y++;
+        if(y >= matrix.length) break;
+
+        let row = new Array();
+        for(let x=0; x<matrix.length; ++x)
+        {
+            if(x == i) x++;
+            if(x >= matrix.length) break;
+            row.push(matrix[y][x]);
+        }
+        tmatrix.push(row);
+    }
+
+    // works with order 1-3
+    cofactor *= ruleOfSarrus(tmatrix);
+
+    return cofactor;
+
+}
+
+/**
  * Calculate the determinat of a matrix (order: 1 to 3)
  * @param matrix 
  */
